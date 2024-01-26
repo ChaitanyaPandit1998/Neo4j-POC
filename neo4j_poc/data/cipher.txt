@@ -1,0 +1,19 @@
+CREATE
+(econ:UpstreamData{name:"Economy DB Data"}),
+(table1:CurveTable{name:"Curve1"})<-[:DATA_USED_IN]-(econ),
+(table2:CurveTable{name:"Curve2"})<-[:DATA_USED_IN]-(econ),
+(factor1:IRFactor{name:"Factor1"})<-[:DATA_USED_IN]-(table1),
+(factor2:IRFactor{name:"Factor2"})<-[:DATA_USED_IN]-(table1),
+(factor3:IRFactor{name:"Factor3"})<-[:DATA_USED_IN]-(table2),
+(factor4:IRFactor{name:"Factor4"})<-[:DATA_USED_IN]-(table2),
+(factor5:ComboFactor{name:"ComboFactor1"}),
+(factor5)<-[:FACTOR_USED_IN]-(factor1),
+(factor5)<-[:FACTOR_USED_IN]-(factor2),
+(factor6:ComboFactor{name:"ComboFactor2"})<-[:FACTOR_USED_IN]-(factor3),
+(factor7:ComboFactor{name:"ComboFactor3"})<-[:FACTOR_USED_IN]-(factor4);
+
+
+
+MATCH (:UpstreamData {name: "Economy DB Data"})-[r:DATA_USED_IN]->(table:CurveTable)
+MATCH((table)-[:DATA_USED_IN]->(factor:IRFactor))
+RETURN factor
