@@ -17,3 +17,55 @@ CREATE
 MATCH (:UpstreamData {name: "Economy DB Data"})-[r:DATA_USED_IN]->(table:CurveTable)
 MATCH((table)-[:DATA_USED_IN]->(factor:IRFactor))
 RETURN factor
+
+
+CREATE
+(em_sov:FANitejob{name:"USD EM SOV", status:"INACTIVE", date:"2023-09-10"}),
+(nj1:Nitejob{name:"NJ1", status:"INACTIVE",date:"2023-09-10"})<-[:DEPENDS_ON]-(em_sov),
+(nj2:Nitejob{name:"NJ2", status:"COMPLETED",date:"2023-09-10"})<-[:DEPENDS_ON]-(em_sov);
+
+
+CREATE
+(factor1:VarFactor{name:"factor1"}),
+(source1:VarSource{name:"source1"})<-[:BELONGS_TO]-(factor1),
+(block1:VarBlock{name:"block1"})<-[:BELONGS_TO]-(source1),
+(block2:VarBlock{name:"block2"})<-[:BELONGS_TO]-(source1),
+(schema1:VarSchema{name:"schema1"})<-[:BELONGS_TO]-(block1),
+(schema2:VarSchema{name:"schema2"})<-[:BELONGS_TO]-(block2);
+
+//CREATING RELATIONS
+MATCH
+(block2:VarBlock{name:"block2"})
+MATCH
+(schema1:VarSchema{name:"schema1"})
+MERGE
+(block2)-[:BELONGS_TO]->(schema1);
+
+//CREATING RELATIONS
+MATCH
+(block1:VarBlock{name:"block1"})
+MATCH
+(schema1:VarSchema{name:"schema1"})
+MERGE
+(block1)-[:BELONGS_TO]->(schema1);
+
+
+// Deleting node
+MATCH (block1:VarBlock{name:"block1"})
+DELETE block1
+
+// Deleting relations
+MATCH (block1:VarBlock{name:"block1"})-[r:BELONGS_TO]->()
+DELETE r
+
+// Delete node and relations both
+MATCH (n:Person {name: 'Carrie-Anne Moss'})
+DETACH DELETE n
+
+
+
+MATCH (:VarSource {name: $name})-[:BELONGS_TO]->(block:VarBlock) RETURN block
+
+MATCH (:VarSource {name: "source1"})-[r:BELONGS_TO]->(block:VarBlock)
+MATCH((block)-[:BELONGS_TO]->(schema:VarSchema))
+RETURN schema
