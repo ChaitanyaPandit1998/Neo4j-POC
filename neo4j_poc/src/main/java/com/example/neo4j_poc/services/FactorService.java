@@ -6,6 +6,7 @@ import com.example.neo4j_poc.repository.ComboFactorRepository;
 import com.example.neo4j_poc.repository.IRFactorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,11 +29,27 @@ public class FactorService {
         return comboFactorRepository.findAllComboFactorsFromCurveTable(name);
     }
 
+    public List<ComboFactor> getComboFactorById(Long id) {
+        return comboFactorRepository.findAllById(Collections.singletonList(id));
+    }
+
+    public List<ComboFactor> getAllComboFactors() {
+        return comboFactorRepository.findAll();
+    }
+
     public List<IRFactor> getIRFactorsBasedOnUpStreamData(String name) {
         return irFactorRepository.findAllIRFactorsFromUpstream(name);
     }
 
     public List<IRFactor> getIRFactorsBasedOnCurveTable(String name) {
         return irFactorRepository.findAllIRFactorsFromCurveTable(name);
+    }
+
+    public List<IRFactor> getIRFactorById(Long id) {
+        return irFactorRepository.findAllById(Collections.singletonList(id));
+    }
+
+    public List<IRFactor> getAllIRFactors() {
+        return irFactorRepository.findAll();
     }
 }

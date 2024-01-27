@@ -12,7 +12,6 @@ public class VarSchema {
 
     private String name;
 
-
     public VarSchema(){}
 
     public Long getId() {

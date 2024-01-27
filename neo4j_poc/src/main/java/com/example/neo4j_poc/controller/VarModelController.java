@@ -21,15 +21,40 @@ public class VarModelController {
         this.varModelService = varModelService;
     }
 
-    @GetMapping("vb/{name}")
+    @GetMapping("/vb/{name}")
     public ResponseEntity<List<VarBlock>> getVarBlocks(@PathVariable String name) {
         List<VarBlock> response = varModelService.getVarBlocks(name);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("vs/{name}")
+    @GetMapping("/vb/id/{id}")
+    public ResponseEntity<List<VarBlock>> getVarBlockById(@PathVariable Long id) {
+        List<VarBlock> response = varModelService.getVarBlockById(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/vb/all")
+    public ResponseEntity<List<VarBlock>> getAllVarBlocks() {
+        List<VarBlock> response = varModelService.getAllVarBlocks();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/vs/{name}")
     public ResponseEntity<List<VarSchema>> getVarSchemas(@PathVariable String name) {
         List<VarSchema> response = varModelService.getVarSchemas(name);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/vs/id/{id}")
+    public ResponseEntity<List<VarSchema>> getVarSchemaById(@PathVariable Long id) {
+        List<VarSchema> response = varModelService.getVarSchemaById(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/vs/all")
+    public ResponseEntity<List<VarSchema>> getAllVarSchemas() {
+        List<VarSchema> response = varModelService.getAllVarSchemas();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }

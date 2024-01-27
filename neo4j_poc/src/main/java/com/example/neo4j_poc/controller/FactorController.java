@@ -32,6 +32,18 @@ public class FactorController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("curve/combo/id/{id}")
+    public ResponseEntity<List<ComboFactor>> getComboFactorsById(@PathVariable Long id) {
+        List<ComboFactor> response = factorService.getComboFactorById(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("curve/combo/all")
+    public ResponseEntity<List<ComboFactor>> getAllComboFactors() {
+        List<ComboFactor> response = factorService.getAllComboFactors();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
     @GetMapping("upstream/ir/{name}")
     public ResponseEntity<List<IRFactor>> getIRFactorsFromUpstream(@PathVariable String name) {
@@ -42,6 +54,12 @@ public class FactorController {
     @GetMapping("curve/ir/{name}")
     public ResponseEntity<List<IRFactor>> getIRFactorsFromCurves(@PathVariable String name) {
         List<IRFactor> response = factorService.getIRFactorsBasedOnCurveTable(name);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("curve/ir/all")
+    public ResponseEntity<List<IRFactor>> getAllIRFactors() {
+        List<IRFactor> response = factorService.getAllIRFactors();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

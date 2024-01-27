@@ -12,7 +12,6 @@ public class VarBlock {
 
     private String name;
 
-
     public VarBlock(){}
 
     public Long getId() {

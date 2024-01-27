@@ -10,7 +10,6 @@ public class IRFactor {
 
     private String name;
 
-
     public IRFactor(){}
 
     public Long getId() {

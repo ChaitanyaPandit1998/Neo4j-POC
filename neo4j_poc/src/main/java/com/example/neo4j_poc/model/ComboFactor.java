@@ -10,7 +10,6 @@ public class ComboFactor {
 
     private String name;
 
-
     public ComboFactor(){}
 
     public Long getId() {

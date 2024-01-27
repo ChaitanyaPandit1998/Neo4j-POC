@@ -25,4 +25,16 @@ public class NJController {
         List<Nitejob> response = faNitejobService.getDependentNitejobs(name);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<List<Nitejob>> getNiteJobById(@PathVariable Long id) {
+        List<Nitejob> response = faNitejobService.getNiteJobById(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Nitejob>> getAllNiteJobs() {
+        List<Nitejob> response = faNitejobService.getAllNiteJobs();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
